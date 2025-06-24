@@ -1,4 +1,5 @@
 name: Run Playwright
+
 on:
   push:
     branches:
@@ -27,12 +28,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv .venv  
-          source .venv/bin/activate  
-          pip install -r requirements.txt 
-          python -m playwright install  
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+          python -m playwright install
 
       - name: Run Playwright tests
         run: |
-          source .venv/bin/activate  # Aktywujemy środowisko
-          pytest tests/test_analytics_cookies.py --browser ${{ matrix.browser }} -n 3 
+          source .venv/bin/activate
+          pytest tests/test_analytics_cookies.py
