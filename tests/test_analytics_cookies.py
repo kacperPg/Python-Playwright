@@ -12,6 +12,11 @@ def test_analytics_cookies(browser_type):
 
         page.goto("https://www.ing.pl")
         page.wait_for_load_state("networkidle")
+
+        print(page.url)
+        print(page.content())
+
+
         page.wait_for_selector("div.cookie-policy-content", timeout=120000)
         print(page.url)
         page.wait_for_load_state("load")
