@@ -57,6 +57,13 @@ jobs:
             libx11-dev \
             libvulkan1 \
             liblcms2-2
+          sudo add-apt-repository ppa:jonathonf/ffmpeg-4
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y libx264
+          sudo apt-get install -y libgst-plugins-base1.0-0 libgst-plugins-good1.0-0 libgst-plugins-bad1.0-0
+          sudo apt-get install -y \
+            libwebkit2gtk-4.0-dev
 
       - name: Install xvfb for headless browser
         run: |
