@@ -28,13 +28,41 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv .venv  
-          source .venv/bin/activate 
-          pip install -r requirements.txt  
-          pip install pytest-xdist 
-          python -m playwright install  
+          python -m venv .venv  # Create virtual environment
+          source .venv/bin/activate  # Activate the virtual environment
+          pip install -r requirements.txt  # Install dependencies
+          pip install pytest-xdist  # Install pytest-xdist for parallel test execution
+          python -m playwright install  # Install Playwright browsers
 
-      - name: Run Playwright tests in headless mode
+      - name: Install missing dependencies for WebKit (Linux)
         run: |
-          source .venv/bin/activate 
-          pytest tests/test_analytics_cookies.py -n 3
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk-4-1 \
+            libgraphene-1.0-0 \
+            libwoff2-dec1 \
+            libvpx5 \
+            libopus0 \
+            libevent-2.1-7 \
+            libflite1 \
+            libgst1.0-0 \
+            libgdk-pixbuf2.0-0 \
+            libsecret-1-0 \
+            libavif16 \
+            libharfbuzz-icu0 \
+            libhyphen0 \
+            libmanette-0.2-0 \
+            libglesv2.2 \
+            libx264 \
+            libx11-dev \
+            libvulkan1 \
+            liblcms2-2
+
+      - name: Install xvfb for headless browser
+        run: |
+          sudo apt-get install -y xvfb
+
+      - name: Run Playwright tests with xvfb
+        run: |
+          source .venv/bin/activate  
+          xvfb-run pytest tests/test_analytics_cookies.py -n 3
