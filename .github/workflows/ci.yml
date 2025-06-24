@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
 
     strategy:
@@ -28,39 +29,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv .venv  # Create virtual environment
-          source .venv/bin/activate  # Activate the virtual environment
-          pip install -r requirements.txt  # Install dependencies
-          pip install pytest-xdist  # Install pytest-xdist for parallel test execution
-          python -m playwright install  # Install Playwright browsers
-
-      - name: Install missing dependencies for WebKit (Linux)
-        run: |
-          sudo apt-get update  # Update package list
-          sudo apt-get install -y \
-            libgtk-4-1 \
-            libgraphene-1.0-0 \
-            libwoff2-dec1 \
-            libvpx5 \
-            libopus0 \
-            libevent-2.1-7 \
-            libflite1 \
-            libgst1.0-0 \
-            libgdk-pixbuf2.0-0 \
-            libsecret-1-0 \
-            libavif16 \
-            libharfbuzz-icu0 \
-            libhyphen0 \
-            libmanette-0.2-0 \
-            libglesv2.2 \
-            libx264 \
-            libx11-dev \
-            libvulkan1 \
-            liblcms2-2 
-
-      - name: Install xvfb for headless browser
-        run: |
-          sudo apt-get install -y xvfb
+          python -m pip install 
+          pip install -r requirements.txt 
+          pip install pytest-xdist
+      - name: Ensure browsers are installed
+        run: python -m playwright install --with-deps
 
       - name: Run Playwright tests with xvfb
         run: |
