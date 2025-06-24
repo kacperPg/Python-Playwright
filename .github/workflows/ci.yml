@@ -28,12 +28,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install -r requirements.txt
-          python -m playwright install
+          python -m venv .venv  # Create virtual environment
+          source .venv/bin/activate  # Activate the virtual environment
+          pip install -r requirements.txt  # Install dependencies
+          pip install pytest-xdist  # Install pytest-xdist for parallel test execution
+          python -m playwright install  # Install Playwright browsers
 
       - name: Run Playwright tests
         run: |
-          source .venv/bin/activate
-          pytest -n 3
+          source .venv/bin/activate  # Activate virtual environment
+          pytest tests/test_analytics_cookies.py -n 3  # Run tests in parallel with 3 workers
