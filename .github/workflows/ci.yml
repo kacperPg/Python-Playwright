@@ -37,25 +37,24 @@ jobs:
       - name: Install missing dependencies for WebKit (Linux)
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            libgtk-4-1 \
-            libgraphene-1.0-0 \
-            libwoff2-dec1 \
-            libvpx5 \
-            libopus0 \
-            libevent-2.1-7 \
-            libflite1 \
-            libgst1.0-0 \
-            libgdk-pixbuf2.0-0 \
-            libsecret-1-0 \
-            libavif16 \
-            libharfbuzz-icu0 \
-            libhyphen0 \
-            libmanette-0.2-0 \
-            libglesv2.2 \
-            libx264 \
-            libx11-dev \
-            libvulkan1 \
+          sudo apt-get install -y 
+            libgtk-4-1 
+            libgraphene-1.0-0 
+            libvpx5 
+            libopus0 
+            libevent-2.1-7 
+            libflite1 
+            libgst1.0-0 
+            libgdk-pixbuf2.0-0 
+            libsecret-1-0 
+            libavif16 
+            libharfbuzz-icu0 
+            libhyphen0 
+            libmanette-0.2-0 
+            libglesv2.2 
+            libx264 
+            libx11-dev 
+            libvulkan1 
             liblcms2-2
           sudo add-apt-repository ppa:jonathonf/ffmpeg-4
           sudo apt-get update
