@@ -37,5 +37,4 @@ jobs:
 
       - name: Run Playwright tests with xvfb
         run: |
-          source .venv/bin/activate  
-          xvfb-run pytest tests/test_analytics_cookies.py -n 3
+          pytest -n 3
