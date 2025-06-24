@@ -28,53 +28,41 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv .venv  
-          source .venv/bin/activate  
-          pip install -r requirements.txt  
-          pip install pytest-xdist  
-          python -m playwright install  
-          
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+          pip install pytest-xdist
+          python -m playwright install
+
       - name: Install missing dependencies for WebKit (Linux)
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             libgtk-4-1 \
             libgraphene-1.0-0 \
-            libwoff2dec1 \
+            libwoff2-dec1 \
             libvpx5 \
             libopus0 \
             libevent-2.1-7 \
-            libgstallocators1.0-0 \
-            libgstapp1.0-0 \
-            libgstpbutils1.0-0 \
-            libgstaudio1.0-0 \
-            libgsttag1.0-0 \
-            libgstvideo1.0-0 \
-            libgstgl1.0-0 \
-            libgstcodecparsers1.0-0 \
-            libgstfft1.0-0 \
             libflite1 \
-            libflite_usenglish1 \
-            libflite_cmu_grapheme_lang1 \
-            libflite_cmu_grapheme_lex1 \
-            libflite_cmu_indic_lang1 \
-            libflite_cmu_indic_lex1 \
-            libflite_cmulex1 \
-            libflite_cmu_time_awb1 \
-            libflite_cmu_us_awb1 \
-            libflite_cmu_us_kal16 \
-            libflite_cmu_us_kal \
-            libflite_cmu_us_rms \
-            libflite_cmu_us_slt \
+            libgst1.0-0 \
+            libgdk-pixbuf2.0-0 \
+            libsecret-1-0 \
             libavif16 \
             libharfbuzz-icu0 \
-            libsecret-1-0 \
             libhyphen0 \
             libmanette-0.2-0 \
             libglesv2.2 \
-            libx264
+            libx264 \
+            libx11-dev \
+            libvulkan1 \
+            liblcms2-2
 
-      - name: Run Playwright tests
+      - name: Install xvfb for headless browser
         run: |
-          source .venv/bin/activate  
-          pytest tests/test_analytics_cookies.py -n 3  #
+          sudo apt-get install -y xvfb
+
+      - name: Run Playwright tests with xvfb
+        run: |
+          source .venv/bin/activate
+          xvfb-run pytest tests/test_analytics_cookies.py -n 3
