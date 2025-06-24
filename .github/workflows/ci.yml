@@ -36,4 +36,4 @@ jobs:
       - name: Run Playwright tests
         run: |
           source .venv/bin/activate
-          pytest tests/test_analytics_cookies.py
+          pytest -n 3

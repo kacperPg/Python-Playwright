@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 @pytest.mark.parametrize("browser_type", ["chromium", "firefox", "webkit"])
 def test_analytics_cookies(browser_type):
     with sync_playwright() as p:
-        browser = getattr(p, browser_type).launch(headless=False)
+        browser = getattr(p, browser_type).launch(headless=True)
         context = browser.new_context()
         page = context.new_page()
         context.clear_cookies()
