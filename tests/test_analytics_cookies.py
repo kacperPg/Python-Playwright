@@ -11,7 +11,8 @@ def test_analytics_cookies(browser_type):
         context.clear_cookies()
 
         page.goto("https://www.ing.pl")
-        page.wait_for_selector("div.cookie-policy-content")
+        page.wait_for_selector("div.cookie-policy-content", timeout=60000)
+        page.wait_for_load_state("load")
         page.click("button.js-cookie-policy-main-settings-button")
         page.wait_for_selector("div.js-checkbox[name='CpmAnalyticalOption']")
         toggle_button = page.query_selector("div.js-checkbox[name='CpmAnalyticalOption']")
